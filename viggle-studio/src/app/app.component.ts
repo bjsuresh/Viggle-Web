@@ -4,6 +4,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular';
 import { ToastService } from './core/toast.service';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { registerIcons } from './core/icons';
 import { SettingsService } from './core/settings.service';
 import { JobsService } from './core/jobs.service';
@@ -31,6 +32,9 @@ export class AppComponent {
   private async boot(): Promise<void> {
     await this.settings.load();
     await Promise.all([this.jobs.load(), this.stories.load()]);
+    if (Capacitor.isNativePlatform()) {
+      await SplashScreen.hide({ fadeOutDuration: 300 }).catch(() => undefined);
+    }
     await this.credits.refresh();
     if (!this.settings.settings().appToken && this.credits.error()) {
       await this.router.navigate(['/tabs/settings']);

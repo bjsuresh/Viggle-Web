@@ -20,7 +20,7 @@ import { ASPECT_RATIOS, VIDEO_RESOLUTIONS } from '../../core/models';
         <div class="vs-section-title">Backend server</div>
         <div class="vs-card vs-stack">
           <ion-input label="Server URL" labelPlacement="stacked" fill="outline" inputmode="url" autocapitalize="off"
-            placeholder="http://192.168.1.10:3000" [value]="s.settings().serverUrl"
+            placeholder="https://viggle-studio-api.onrender.com" [value]="s.settings().serverUrl"
             (ionChange)="save({ serverUrl: $any($event).detail.value })"></ion-input>
           <ion-input label="App token (x-app-token)" labelPlacement="stacked" fill="outline" type="password" autocapitalize="off"
             placeholder="matches APP_ACCESS_TOKEN on the server" [value]="s.settings().appToken"

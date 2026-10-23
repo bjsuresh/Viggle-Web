@@ -15,7 +15,7 @@ export interface AppSettings {
 const KEY = 'vs.settings';
 
 const DEFAULTS: AppSettings = {
-  serverUrl: Capacitor.isNativePlatform() ? 'http://192.168.1.10:3000' : 'http://localhost:3000',
+  serverUrl: Capacitor.isNativePlatform() ? 'https://viggle-studio-api.onrender.com' : 'http://localhost:3000',
   appToken: '',
   defaultQuality: 'high',
   defaultResolution: '768p',
