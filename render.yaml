@@ -1,0 +1,25 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# In the Render dashboard: New → Blueprint → pick this repo. Then fill the two secret env vars.
+services:
+  - type: web
+    name: viggle-studio-api
+    runtime: docker
+    rootDir: server
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: VIGGLE_API_KEY
+        sync: false          # paste in dashboard (secret)
+      - key: APP_ACCESS_TOKEN
+        sync: false          # paste in dashboard (secret) — same value goes into the app Settings
+      - key: ANTHROPIC_API_KEY
+        sync: false          # optional, leave empty to use the template story planner
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: MAX_UPLOAD_MIB
+        value: "100"
+      - key: OUTPUT_DIR
+        value: /app/output

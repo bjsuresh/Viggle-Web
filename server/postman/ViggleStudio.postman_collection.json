@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "Viggle Studio Backend",
+    "description": "Local proxy for the Viggle V1 API used by the Viggle Studio mobile app. Set {{baseUrl}} and {{appToken}} in an environment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": { "type": "apikey", "apikey": [{ "key": "key", "value": "x-app-token" }, { "key": "value", "value": "{{appToken}}" }, { "key": "in", "value": "header" }] },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "appToken", "value": "change-me" }
+  ],
+  "item": [
+    { "name": "Health", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/health" } },
+    { "name": "Credits", "request": { "method": "GET", "url": "{{baseUrl}}/api/credits" } },
+    {
+      "name": "Videos",
+      "item": [
+        {
+          "name": "Text to video",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/videos",
+            "body": { "mode": "formdata", "formdata": [
+              { "key": "prompt", "value": "a paper airplane gliding through a sunlit office", "type": "text" },
+              { "key": "quality", "value": "low", "type": "text" },
+              { "key": "duration_s", "value": "5", "type": "text" },
+              { "key": "resolution", "value": "768p", "type": "text" },
+              { "key": "aspect_ratio", "value": "16:9", "type": "text" }
+            ] }
+          }
+        },
+        {
+          "name": "First frame to video",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/videos",
+            "body": { "mode": "formdata", "formdata": [
+              { "key": "prompt", "value": "the camera slowly pushes in as leaves drift by", "type": "text" },
+              { "key": "quality", "value": "high", "type": "text" },
+              { "key": "first_frame_image", "type": "file", "src": "" }
+            ] }
+          }
+        },
+        {
+          "name": "Character animation",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/videos",
+            "body": { "mode": "formdata", "formdata": [
+              { "key": "driving_video", "type": "file", "src": "" },
+              { "key": "character_image", "type": "file", "src": "" },
+              { "key": "enhance_mode", "value": "planner", "type": "text" }
+            ] }
+          }
+        },
+        {
+          "name": "Upscale 2x",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/videos/super-resolution",
+            "body": { "mode": "formdata", "formdata": [{ "key": "video_url", "value": "https://...", "type": "text" }] }
+          }
+        },
+        { "name": "List videos", "request": { "method": "GET", "url": "{{baseUrl}}/api/videos?limit=20" } },
+        { "name": "Get video", "request": { "method": "GET", "url": "{{baseUrl}}/api/videos/vid_xxx" } }
+      ]
+    },
+    {
+      "name": "Images",
+      "item": [
+        {
+          "name": "Generate image",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/images",
+            "body": { "mode": "formdata", "formdata": [
+              { "key": "prompt", "value": "cinematic portrait of a jazz singer, film grain", "type": "text" },
+              { "key": "aspect_ratio", "value": "3:2", "type": "text" },
+              { "key": "resolution", "value": "1K", "type": "text" },
+              { "key": "n", "value": "2", "type": "text" }
+            ] }
+          }
+        },
+        { "name": "Get image", "request": { "method": "GET", "url": "{{baseUrl}}/api/images/img_xxx" } }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        { "name": "List characters", "request": { "method": "GET", "url": "{{baseUrl}}/api/characters" } },
+        { "name": "Create character", "request": { "method": "POST", "url": "{{baseUrl}}/api/characters", "body": { "mode": "formdata", "formdata": [{ "key": "image", "type": "file", "src": "" }, { "key": "name", "value": "Mia", "type": "text" }, { "key": "type", "value": "render", "type": "text" }] } } },
+        { "name": "List motions", "request": { "method": "GET", "url": "{{baseUrl}}/api/motions" } },
+        { "name": "Text to motion", "request": { "method": "POST", "url": "{{baseUrl}}/api/motions", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"text\":\"a person walks forward and waves\",\"duration_seconds\":5,\"name\":\"wave\"}" } } },
+        { "name": "Import motion template", "request": { "method": "POST", "url": "{{baseUrl}}/api/motions/import", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"template_id\":\"<template id>\"}" } } },
+        { "name": "Motion templates", "request": { "method": "GET", "url": "{{baseUrl}}/api/motions/templates" } },
+        { "name": "Export motion (glb)", "request": { "method": "GET", "url": "{{baseUrl}}/api/motions/mot_xxx/export?download_type=glb" } }
+      ]
+    },
+    {
+      "name": "Renders (Video Remix)",
+      "item": [
+        { "name": "Create render", "request": { "method": "POST", "url": "{{baseUrl}}/api/renders", "body": { "mode": "formdata", "formdata": [{ "key": "image", "type": "file", "src": "" }, { "key": "motion_video", "type": "file", "src": "" }, { "key": "background_mode", "value": "solid", "type": "text" }, { "key": "bg_color", "value": "0,177,64", "type": "text" }] } } },
+        { "name": "Render events (SSE)", "request": { "method": "GET", "url": "{{baseUrl}}/api/renders/render_xxx/events" } }
+      ]
+    },
+    {
+      "name": "Scenes",
+      "item": [
+        { "name": "Create scene from prompt", "request": { "method": "POST", "url": "{{baseUrl}}/api/scenes/pano", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"sessionId\":\"demo-1\",\"prompt\":\"a cozy cabin interior with a fireplace\",\"quality\":\"low\"}" } } },
+        { "name": "Generate views", "request": { "method": "POST", "url": "{{baseUrl}}/api/scenes/generate", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"sessionId\":\"demo-1\",\"referenceBatchIds\":[\"<batchId>\"],\"targetPosition\":{\"position\":[0,0,0],\"yaw\":45,\"pitch\":0},\"projection\":\"perspective\"}" } } },
+        { "name": "Get scene task", "request": { "method": "GET", "url": "{{baseUrl}}/api/scenes/scn_xxx" } }
+      ]
+    },
+    {
+      "name": "Stories",
+      "item": [
+        { "name": "Plan story", "request": { "method": "POST", "url": "{{baseUrl}}/api/stories/plan", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"idea\":\"a lighthouse keeper befriends a lost baby whale\",\"scenes\":4,\"style\":\"cinematic\",\"tone\":\"uplifting\",\"duration_s\":5,\"aspect_ratio\":\"16:9\"}" } } },
+        { "name": "Stitch capabilities", "request": { "method": "GET", "url": "{{baseUrl}}/api/stories/stitch/capabilities" } },
+        { "name": "Stitch clips", "request": { "method": "POST", "url": "{{baseUrl}}/api/stories/stitch", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"clips\":[\"https://...mp4\",\"https://...mp4\"],\"aspect_ratio\":\"16:9\",\"resolution\":\"1080p\"}" } } }
+      ]
+    }
+  ]
+}

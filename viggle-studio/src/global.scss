@@ -1,0 +1,109 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Studio look: always dark */
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+html, body {
+  background: var(--vs-bg);
+  color: var(--vs-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+ion-content {
+  --background: var(--vs-bg);
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+ion-toolbar {
+  --background: color-mix(in srgb, var(--vs-bg) 88%, transparent);
+  --border-width: 0;
+  backdrop-filter: blur(14px);
+}
+ion-title { font-weight: 800; letter-spacing: -0.01em; }
+
+ion-tab-bar {
+  --background: rgba(15, 15, 25, 0.92);
+  border-top: 1px solid var(--vs-border);
+  backdrop-filter: blur(16px);
+  padding-top: 4px;
+}
+ion-tab-button {
+  --color: var(--vs-muted);
+  --color-selected: #fff;
+  font-weight: 600;
+  font-size: 11px;
+}
+ion-tab-button.tab-selected ion-icon { color: var(--vs-secondary); filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6)); }
+
+ion-button { text-transform: none; letter-spacing: 0; font-weight: 700; --border-radius: 12px; }
+ion-button[fill="outline"] { --border-color: var(--vs-border-strong); --color: var(--vs-text); }
+ion-button.gradient { --background: var(--vs-accent-gradient); --background-hover: var(--vs-accent-gradient); --background-activated: var(--vs-accent-gradient); --color: #fff; box-shadow: var(--vs-glow); }
+
+ion-input, ion-textarea, ion-select {
+  --background: var(--vs-surface);
+  --color: var(--vs-text);
+  --placeholder-color: var(--vs-muted);
+  --padding-start: 14px;
+  --padding-end: 14px;
+}
+ion-textarea.prompt {
+  --background: var(--vs-surface);
+  --border-radius: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border: 1px solid var(--vs-border-strong);
+  border-radius: 16px;
+  font-size: 15px;
+  min-height: 120px;
+}
+ion-textarea.prompt.has-focus { border-color: var(--vs-primary); box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.2); }
+
+ion-range { --bar-background: var(--vs-surface-2); --bar-background-active: var(--vs-primary); --knob-background: #fff; --knob-size: 22px; padding: 0 4px; }
+ion-toggle { --track-background-checked: var(--vs-primary); }
+ion-item { --background: var(--vs-surface); --border-color: var(--vs-border); --padding-start: 14px; --inner-padding-end: 10px; }
+ion-list { background: transparent; }
+ion-card { border-radius: var(--vs-radius); border: 1px solid var(--vs-border); box-shadow: none; margin: 0; }
+ion-chip { --background: var(--vs-surface-2); --color: var(--vs-text); font-weight: 600; }
+ion-segment { --background: var(--vs-surface); border-radius: 12px; }
+ion-segment-button { --indicator-color: var(--vs-primary); --color: var(--vs-muted); --color-checked: #fff; text-transform: none; font-weight: 700; min-height: 38px; }
+ion-progress-bar { --background: var(--vs-surface-2); --progress-background: var(--vs-accent-gradient); border-radius: 999px; height: 6px; }
+
+/* Layout helpers */
+.vs-section { margin: 18px 0 8px; }
+.vs-section-title { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vs-muted); margin: 0 0 10px; display: flex; justify-content: space-between; align-items: center; }
+.vs-section-title .link { font-size: 12px; font-weight: 700; color: var(--vs-secondary); text-transform: none; letter-spacing: 0; text-decoration: none; cursor: pointer; }
+.vs-field { margin-bottom: 18px; }
+.vs-label { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.vs-label small { font-weight: 500; color: var(--vs-muted); }
+.vs-help { font-size: 12px; color: var(--vs-muted); margin-top: 6px; line-height: 1.4; }
+.vs-card { background: var(--vs-surface); border: 1px solid var(--vs-border); border-radius: var(--vs-radius); padding: 14px; }
+.vs-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.vs-stack { display: flex; flex-direction: column; gap: 10px; }
+.vs-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.vs-empty { text-align: center; padding: 40px 20px; color: var(--vs-muted); }
+.vs-empty ion-icon { font-size: 42px; margin-bottom: 8px; color: var(--vs-secondary); opacity: 0.8; }
+.vs-empty h3 { color: var(--vs-text); font-size: 16px; margin: 0 0 4px; }
+.vs-empty p { margin: 0; font-size: 13px; }
+.vs-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; background: var(--vs-surface-2); color: var(--vs-muted); }
+.vs-pill.ok { background: rgba(74, 222, 128, 0.16); color: #4ade80; }
+.vs-pill.bad { background: rgba(248, 113, 113, 0.16); color: #f87171; }
+.vs-pill.busy { background: rgba(124, 92, 255, 0.2); color: #c4b5fd; }
+.vs-hero { padding: 22px 18px; border-radius: 22px; background: radial-gradient(120% 140% at 0% 0%, rgba(124, 92, 255, 0.55), transparent 60%), radial-gradient(120% 140% at 100% 100%, rgba(34, 211, 238, 0.4), transparent 60%), var(--vs-surface); border: 1px solid var(--vs-border-strong); }
+.vs-hero h1 { margin: 0 0 6px; font-size: 24px; font-weight: 900; letter-spacing: -0.02em; }
+.vs-hero p { margin: 0; color: var(--vs-muted); font-size: 13px; }
+.vs-video { width: 100%; border-radius: 16px; background: #000; display: block; }
+.vs-advanced summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--vs-secondary); list-style: none; padding: 8px 0; }
+.vs-advanced summary::-webkit-details-marker { display: none; }
+.vs-advanced summary::before { content: '▸ '; }
+.vs-advanced[open] summary::before { content: '▾ '; }

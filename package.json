@@ -1,0 +1,19 @@
+{
+  "name": "viggle-studio-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root helper for the Viggle Studio monorepo: server/ (Node backend) and viggle-studio/ (Ionic Angular app).",
+  "scripts": {
+    "postinstall": "npm install --prefix server && npm install --prefix viggle-studio",
+    "install:all": "npm install --prefix server && npm install --prefix viggle-studio",
+    "server": "npm run dev --prefix server",
+    "server:build": "npm run build --prefix server",
+    "server:start": "npm run start --prefix server",
+    "app": "npm start --prefix viggle-studio",
+    "app:build": "npm run build --prefix viggle-studio",
+    "app:lint": "npm run lint --prefix viggle-studio",
+    "android:sync": "npm run build --prefix viggle-studio && npx --prefix viggle-studio cap sync android",
+    "android:open": "npx --prefix viggle-studio cap open android",
+    "build": "npm run server:build && npm run app:build"
+  }
+}
